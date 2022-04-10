@@ -1,26 +1,26 @@
-﻿name: Continuous Integration ♾️⬇️
+name: Continuous Integration ♾️⬇️
 
 on:
-	push:
-		branches:
-			- main
+  push:
+    branches:
+      - main
 
 jobs:
-	build:
-		runs-on: ubuntu-latest
-		steps:
-			- name: Check out code 👀
-			  uses: actions/checkout@v3
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code 👀
+        uses: actions/checkout@v3
 			
-			- name: Setup .Net ⚒️
-			  uses: actions/setup-dotnet@v2
-			  with:
-				dotnet-version: "6.x"
+      - name: Setup .NET ⚒️ 
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: "6.x"
 
-			- name: Restore packages and dependencies 📥📦
-				run: dotnet restore
+      - name: Restore packages and dependencies 📥📦
+        run: dotnet restore
 
-			- name: Build 👷‍♀🏗️
-				run: dotnet build -c Release --norestore
+      - name: Build 👷‍♀🏗️
+        run: dotnet build -c Release --norestore
 
-			- name: Run tests 🩺🔬🧑‍🔬
+      - name: Run tests 🩺🔬🧑‍🔬
