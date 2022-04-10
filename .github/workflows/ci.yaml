@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Check out code 👀
         uses: actions/checkout@v3
-			
-      - name: Setup .NET ⚒️ 
+
+      - name: Setup .NET ⚒️
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: "6.x"
