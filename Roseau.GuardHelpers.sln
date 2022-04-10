@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roseau.GuardHelpers", "scr\Roseau.GuardHelpers\Roseau.GuardHelpers.csproj", "{3C286D87-CADA-4466-B401-4933C90624BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Roseau.GuardHelpers.UnitTests", "tests\Roseau.GuardHelpers.UnitTests\Roseau.GuardHelpers.UnitTests.csproj", "{8E08C3E0-9847-434A-BFC3-14817EA4462F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3C286D87-CADA-4466-B401-4933C90624BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C286D87-CADA-4466-B401-4933C90624BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C286D87-CADA-4466-B401-4933C90624BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E08C3E0-9847-434A-BFC3-14817EA4462F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E08C3E0-9847-434A-BFC3-14817EA4462F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E08C3E0-9847-434A-BFC3-14817EA4462F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E08C3E0-9847-434A-BFC3-14817EA4462F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
