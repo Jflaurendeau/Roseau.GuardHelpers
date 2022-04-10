@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Copyright>MIT</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+	<Authors>Jean-Francois Laurendeau</Authors>
+    <PackageProjectUrl>https://github.com/Jflaurendeau/Roseau.GuardHelpers</PackageProjectUrl>
+    <Description>Guard extension to standardise exception throwing</Description>
+    <RepositoryUrl>https://github.com/Jflaurendeau/Roseau.GuardHelpers.git</RepositoryUrl>
+    <PackageTags>Guard; Guard Extension</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
