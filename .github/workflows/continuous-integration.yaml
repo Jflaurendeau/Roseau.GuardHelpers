@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Check out code 👀
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup .NET ⚒️
         uses: actions/setup-dotnet@v2
