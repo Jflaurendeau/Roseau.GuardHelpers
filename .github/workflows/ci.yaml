@@ -21,6 +21,6 @@ jobs:
         run: dotnet restore
 
       - name: Build 👷‍♀🏗️
-        run: dotnet build -c Release --norestore
+        run: dotnet build -c Release --no-restore
 
 #      - name: Run tests 🩺🔬🧑‍🔬
