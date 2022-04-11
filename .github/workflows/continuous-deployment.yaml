@@ -1,0 +1,21 @@
+name: Continuous Deploymet ♾️🚀
+
+on:
+  release:
+    types:
+      - published
+  workflow_run:
+    workflows:
+      - "Continuous Integration ♾️⬇️"
+    types:
+      - completed
+    branches:
+      - main
+      - develop
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == "success" }}
+    steps:
+      - run: echo "The triggering workflow passed"

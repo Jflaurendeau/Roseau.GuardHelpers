@@ -4,6 +4,27 @@ on:
   push:
     branches:
       - main
+      - develop
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+  fork:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths-ignore:
+      - "docs/**"
+      - "*.md"
+
+env:
+  DOTNET_VERSION: "6.x"
 
 jobs:
   build:
@@ -17,7 +38,7 @@ jobs:
       - name: Setup .NET ⚒️
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: "6.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore packages and dependencies 📥📦
         run: dotnet restore
