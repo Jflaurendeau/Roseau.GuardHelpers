@@ -1,4 +1,4 @@
-[![Continuous Integration ♾️⬇️](https://github.com/Jflaurendeau/Roseau.GuardHelpers/actions/workflows/ci.yaml/badge.svg)](https://github.com/Jflaurendeau/Roseau.GuardHelpers/actions/workflows/ci.yaml)
+[![Continuous Integration ♾️⬇️](https://github.com/Jflaurendeau/Roseau.GuardHelpers/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/Jflaurendeau/Roseau.GuardHelpers/actions/workflows/continuous-integration.yaml)
 # Roseau.GuardHelpers
 Helper Methods to standardise exceptions.
 
