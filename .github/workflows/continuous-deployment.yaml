@@ -16,12 +16,14 @@ on:
 jobs:
   on-Continuous-Integration-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: |
+        ${{ github.event_name == 'workflow_run' }} &&
+        ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo "The triggering workflow passed"
   
   on-release:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name = 'release' }}
     steps:
       - run: echo "The triggering workflow passed"
