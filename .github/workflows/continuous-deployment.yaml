@@ -1,4 +1,4 @@
-name: Continuous Deploymet ♾️🚀
+name: Continuous Deployment ♾️🚀
 
 on:
   release:
@@ -16,6 +16,6 @@ on:
 jobs:
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == "success" }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - run: echo "The triggering workflow passed"
