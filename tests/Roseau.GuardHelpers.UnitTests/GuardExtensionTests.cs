@@ -10,7 +10,7 @@ namespace Roseau.GuardHelpers.UnitTests
         public void IsLessThanOrEqualTo_BothDatesAreEquals_NoThrow()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
 
             // Act and Assert
             GuardExtension.IsLessThanOrEqualTo(firstDate, nameof(firstDate), firstDate, nameof(firstDate));
@@ -19,7 +19,7 @@ namespace Roseau.GuardHelpers.UnitTests
         public void IsLessThanOrEqualTo_FirstDateBeforeSecondDate_NoThrow()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
             DateOnly secondDate = firstDate.AddDays(1);
 
             // Act and Assert
@@ -29,7 +29,7 @@ namespace Roseau.GuardHelpers.UnitTests
         public void IsLessThanOrEqualTo_FirstDateLaterThanSecondDate_Throws()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
             DateOnly secondDate = firstDate.AddDays(-1);
 
             // Act and Assert
