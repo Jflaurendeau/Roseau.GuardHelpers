@@ -27,7 +27,7 @@ env:
   DOTNET_VERSION: "6.x"
 
 jobs:
-  Build:
+  Build-and-Tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -49,21 +49,3 @@ jobs:
 
       - name: Run tests 🩺🔬🧑‍🔬
         run: dotnet test -c Release --no-restore
-
-  Unit-Tests:
-    needs: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Check out code 👀
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Setup .NET ⚒️
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      - name: Run tests 🩺🔬🧑‍🔬
-        run: dotnet test -c Release
