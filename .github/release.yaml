@@ -1,0 +1,26 @@
+﻿changelog:
+  exclude:
+    labels:
+      - duplicate
+      - 'good first issue'
+      - 'help wanted'
+      - invalid
+      - question
+      - wontfix
+
+  categories:
+    - title: Breaking Changes 🚨🐛🪜🦋
+      labels:
+        - 'breaking change'
+    
+    - title: New Features and Enhancement 🎈🎉🎊⚡
+      labels:
+        - 'feature'
+
+    - title: Bugs 🪲🐝🕷️
+      labels:
+        - 'bug'
+
+    - title: Documentation ✍️📄
+      labels:
+        - documentation
