@@ -15,12 +15,16 @@ changelog:
     
     - title: New Features and Enhancement 🎈🎉🎊⚡
       labels:
-        - 'feature'
+        - feature
 
     - title: Bugs 🪲🐝🕷️
       labels:
-        - 'bug'
+        - bug
 
     - title: Documentation ✍️📄
       labels:
         - documentation
+
+    - title: Other Changes
+      labels:
+        - "*"
