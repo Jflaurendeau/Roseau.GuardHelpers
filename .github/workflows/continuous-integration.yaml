@@ -43,16 +43,43 @@ jobs:
 
       - name: Restore packages and dependencies 📥📦
         run: dotnet restore
+      
+      - name: Cache SonarCloud Packages ☁️📦
+        uses: actions/cache@v1
+        with: 
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: Cache SonarCloud scanner ☁️🕵️📝
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: Install SonarCloud scanner ☁️🕵️
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
       - name: Build 👷‍♀🏗️
-        run: dotnet build -c Release --no-restore
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+             .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+             dotnet build -c Release --no-restore
+             .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
       - name: Run tests 🩺🔬🧑‍🔬
         run: dotnet test -c Release --no-restore
 
   Semantic-versioning:
     runs-on: ubuntu-latest
-    needs: Build-and-tests
+    needs: Build-and-Tests
     timeout-minutes: 10
     steps:
       - name: Check out code 👀
