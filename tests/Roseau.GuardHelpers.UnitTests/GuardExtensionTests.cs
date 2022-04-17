@@ -10,26 +10,28 @@ namespace Roseau.GuardHelpers.UnitTests
         public void IsLessThanOrEqualTo_BothDatesAreEquals_NoThrow()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
 
             // Act and Assert
-            GuardExtension.IsLessThanOrEqualTo(firstDate, nameof(firstDate), firstDate, nameof(firstDate));
+            Assert.That.DoesNotThrow<ArgumentOutOfRangeException>(
+                () => GuardExtension.IsLessThanOrEqualTo(firstDate, nameof(firstDate), firstDate, nameof(firstDate)));
         }
         [TestMethod]
         public void IsLessThanOrEqualTo_FirstDateBeforeSecondDate_NoThrow()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
             DateOnly secondDate = firstDate.AddDays(1);
 
             // Act and Assert
-            GuardExtension.IsLessThanOrEqualTo(firstDate, nameof(firstDate), secondDate, nameof(secondDate));
+            Assert.That.DoesNotThrow<ArgumentOutOfRangeException>(
+                () => GuardExtension.IsLessThanOrEqualTo(firstDate, nameof(firstDate), secondDate, nameof(secondDate)));
         }
         [TestMethod]
         public void IsLessThanOrEqualTo_FirstDateLaterThanSecondDate_Throws()
         {
             // Arrange
-            DateOnly firstDate = new DateOnly(2020, 1, 1);
+            DateOnly firstDate = new(2020, 1, 1);
             DateOnly secondDate = firstDate.AddDays(-1);
 
             // Act and Assert
@@ -48,7 +50,8 @@ namespace Roseau.GuardHelpers.UnitTests
             };
 
             // Act and Assert
-            GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates));
+            Assert.That.DoesNotThrow<ArgumentOutOfRangeException>(
+                () => GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates)));
         }
         [TestMethod]
         public void DatesAreInAscendingOrder_AtLeastOneDateIsNotInChronological_Throws()
@@ -64,6 +67,21 @@ namespace Roseau.GuardHelpers.UnitTests
 
             // Act and Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates)));
+        }
+    }
+
+    public static class AssertionExtension
+    {
+        public static void DoesNotThrow<T>(this Assert _, Action action) where T : Exception
+        {
+            try
+            {
+                action();
+            }
+            catch (T)
+            {
+                Assert.Fail($"The {typeof(T).Name} was not supposed to be thrown here.");
+            }
         }
     }
 }

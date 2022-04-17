@@ -4,18 +4,10 @@ on:
   release:
     types:
       - published
-  workflow_run:
-    workflows:
-      - "Continuous Integration ♾️⬇️"
-    types:
-      - completed
-    branches:
-      - main
-      - develop
 
 jobs:
-  on-success:
+  on-release:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name = 'release' }}
     steps:
       - run: echo "The triggering workflow passed"
