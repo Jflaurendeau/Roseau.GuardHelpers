@@ -81,9 +81,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-             .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="calculation.tests\coverage.xml"
+             .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=".\tests\Roseau.GuardHelpers.UnitTests\TestResults\coverage.xml"
              dotnet build
-             coverlet .\tests\Roseau.GuardHelpers.UnitTests\bin\Debug\net6.0\Roseau.GuardHelpers.UnitTests.dll --target "dotnet" --targetargs "test --no-build --no-restore" -f=opencover -o="coverage.xml"
+             coverlet .\tests\Roseau.GuardHelpers.UnitTests\bin\Debug\net6.0\Roseau.GuardHelpers.UnitTests.dll --target "dotnet" --targetargs "test --no-build --no-restore" -f=opencover -o=".\tests\Roseau.GuardHelpers.UnitTests\TestResults\coverage.xml"
              .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
   Semantic-versioning:
