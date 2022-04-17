@@ -64,17 +64,22 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
-      - name: Build 👷‍♀🏗️
+      - name: Build For Analysis 👷‍♀🏗️🕵️
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
              .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-             dotnet restore
-             dotnet build -c Release --no-restore
-             dotnet test -c Release --no-restore
+             dotnet build
+             dotnet test
              .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Restore packages and dependencies 📥📦
+        run: dotnet restore
+
+      - name: Build For Release 👷‍♀🏗️
+        run: dotnet build -c Release --no-restore
 
       - name: Run tests 🩺🔬🧑‍🔬
         run: dotnet test -c Release --no-restore
