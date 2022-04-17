@@ -41,9 +41,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: ${{ env.JDK_VERSION }}
-
-      - name: Restore packages and dependencies 📥📦
-        run: dotnet restore
       
       - name: Cache SonarCloud Packages ☁️📦
         uses: actions/cache@v1
@@ -74,6 +71,7 @@ jobs:
         shell: powershell
         run: |
              .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+             dotnet restore
              dotnet build -c Release --no-restore
              dotnet test -c Release --no-restore
              .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
