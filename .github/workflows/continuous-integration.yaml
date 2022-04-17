@@ -25,6 +25,7 @@ on:
 
 env:
   DOTNET_VERSION: "6.x"
+  JDK_VERSION: "1.11"
 
 jobs:
   Build-and-Tests:
@@ -35,28 +36,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Setup .NET ⚒️
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      - name: Set up JDK 11 (For SonarCloud)
+      - name: Set up JDK 11 (For SonarCloud) ⚒️
         uses: actions/setup-java@v1
         with:
-          java-version: 1.11
+          java-version: ${{ env.JDK_VERSION }}
 
       - name: Restore packages and dependencies 📥📦
         run: dotnet restore
       
       - name: Cache SonarCloud Packages ☁️📦
         uses: actions/cache@v1
-        with: 
+        with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Cache SonarCloud scanner ☁️🕵️📝
+      - name: Cache SonarCloud Scanner ☁️🕵️📝
         id: cache-sonar-scanner
         uses: actions/cache@v1
         with:
