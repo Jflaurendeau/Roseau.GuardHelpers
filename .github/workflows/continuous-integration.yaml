@@ -36,12 +36,23 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
+      - name: Restore packages and dependencies 📥📦
+        run: |
+             dotnet tool install coverlet.console -g
+             dotnet restore
+
+      - name: Build For Release 👷‍♀🏗️
+        run: dotnet build -c Release --no-restore
+
+      - name: Run tests 🩺🔬🧑‍🔬
+        run: dotnet test -c Release --no-restore
+
       - name: Set up JDK 11 (For SonarCloud) ⚒️
         uses: actions/setup-java@v1
         with:
           java-version: ${{ env.JDK_VERSION }}
-      
+
       - name: Cache SonarCloud Packages ☁️📦
         uses: actions/cache@v1
         with:
@@ -70,19 +81,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-             .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+             .\.sonar\scanner\dotnet-sonarscanner begin /k:"Jflaurendeau_Roseau.GuardHelpers" /o:"jflaurendeau" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths=".\tests\Roseau.GuardHelpers.UnitTests\TestResults\coverage.xml"
              dotnet build
-             dotnet test
+             coverlet .\tests\Roseau.GuardHelpers.UnitTests\bin\Debug\net6.0\Roseau.GuardHelpers.UnitTests.dll --target "dotnet" --targetargs "test --no-build --no-restore" -f=opencover -o=".\tests\Roseau.GuardHelpers.UnitTests\TestResults\coverage.xml"
              .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-
-      - name: Restore packages and dependencies 📥📦
-        run: dotnet restore
-
-      - name: Build For Release 👷‍♀🏗️
-        run: dotnet build -c Release --no-restore
-
-      - name: Run tests 🩺🔬🧑‍🔬
-        run: dotnet test -c Release --no-restore
 
   Semantic-versioning:
     runs-on: ubuntu-latest
