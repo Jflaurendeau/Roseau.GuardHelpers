@@ -19,6 +19,9 @@ on:
     branches:
       - main
       - develop
+    types:
+      - opened
+      - reopened
     paths-ignore:
       - "docs/**"
       - "*.md"
