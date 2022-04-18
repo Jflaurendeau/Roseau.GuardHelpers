@@ -1,0 +1,25 @@
+name: Pack and Publish test
+
+on: workflow_dispatch
+
+jobs:
+  Pack-and-Publish:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out code 👀
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Restore packages and dependencies 📥📦
+        run: dotnet restore
+
+      - name: Build For Release 👷‍♀🏗️
+        run: dotnet build -c Release --no-restore
+
+      - name: Run tests 🩺🔬🧑‍🔬
+        run: dotnet test -c Release --no-restore
+
+      - name: Pack the package
+        run: dotnet pack .\scr\Roseau.GuardHelpers\Roseau.GuardHelpers.csproj -c Release --no-restore --output .\scr\Roseau.GuardHelpers\nupkgs
