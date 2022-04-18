@@ -54,6 +54,29 @@ namespace Roseau.GuardHelpers.UnitTests
                 () => GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates)));
         }
         [TestMethod]
+        public void DatesAreInAscendingOrder_OneDateOnly_NoThrow()
+        {
+            // Arrange
+            DateOnly[] dates = new DateOnly[]
+            {
+                new DateOnly(2020, 1, 1),
+            };
+
+            // Act and Assert
+            Assert.That.DoesNotThrow<ArgumentOutOfRangeException>(
+                () => GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates)));
+        }
+        [TestMethod]
+        public void DatesAreInAscendingOrder_EmptyArray_NoThrow()
+        {
+            // Arrange
+            DateOnly[] dates = new DateOnly[2];
+
+            // Act and Assert
+            Assert.That.DoesNotThrow<ArgumentOutOfRangeException>(
+                () => GuardExtension.DatesAreInAscendingOrder(dates, nameof(dates)));
+        }
+        [TestMethod]
         public void DatesAreInAscendingOrder_AtLeastOneDateIsNotInChronological_Throws()
         {
             // Arrange
