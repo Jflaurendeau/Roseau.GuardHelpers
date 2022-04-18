@@ -1,4 +1,4 @@
-name: Pack and Publish test
+name: Pack and Publish
 
 on: workflow_dispatch
 
@@ -23,3 +23,6 @@ jobs:
 
       - name: Pack the package
         run: dotnet pack .\scr\Roseau.GuardHelpers\Roseau.GuardHelpers.csproj -c Release --no-restore --output .\scr\Roseau.GuardHelpers\nupkgs
+
+      - name: Publish the package
+        run: dotnet nuget push .\scr\Roseau.GuardHelpers\nupkgs\*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
