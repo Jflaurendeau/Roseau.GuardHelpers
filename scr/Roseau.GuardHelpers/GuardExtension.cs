@@ -1,6 +1,5 @@
 ﻿using Microsoft.Toolkit.Diagnostics;
 using System.Collections;
-using System.Linq;
 
 namespace Roseau.GuardHelpers;
 
@@ -27,7 +26,7 @@ public static class GuardExtension
     }
     private static int Count(this IEnumerable enumerable, string enumerableName)
     {
-        Guard.IsNotNull(enumerable, nameof(enumerable));
+        Guard.IsNotNull(enumerable, enumerableName);
         if (enumerable is ICollection collection)
             return collection.Count;
         
@@ -57,29 +56,6 @@ public static class GuardExtension
         {
             if (obj is IDisposable disposable)
                 disposable.Dispose();
-        }
-    }
-
-    public class CustomUsingForAgurment : IEnumerable
-    {
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public class Blabla : IEnumerator
-    {
-        public object Current => throw new NotImplementedException();
-
-        public bool MoveNext()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reset()
-        {
-            throw new NotImplementedException();
         }
     }
 }
