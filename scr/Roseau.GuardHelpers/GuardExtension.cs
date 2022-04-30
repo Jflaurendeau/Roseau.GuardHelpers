@@ -32,7 +32,7 @@ public static class GuardExtension
         
         int count = 0;
         var iEnumerator = enumerable.GetEnumerator();
-        CustomUsingForAgurmentException(iEnumerator, () =>
+        UsingStatementForArgumentException(iEnumerator, () =>
         {
             checked
             {
@@ -42,7 +42,7 @@ public static class GuardExtension
         }, enumerableName);
         return count;
     }
-    private static void CustomUsingForAgurmentException(object obj, Action action, string variableName)
+    private static void UsingStatementForArgumentException(object obj, Action action, string variableName)
     {
         try
         {
